@@ -16,5 +16,5 @@ touch http.yaml
   
   -name:  check httpd status
    service:   name=httpd    state=started
-   ------------------------EOF
+------------------------EOF
    
