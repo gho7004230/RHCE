@@ -1,0 +1,20 @@
+-Set of config management scripts
+-Instructions are written in YAML
+
+command:
+touch {playbook_name}.yaml
+
+touch http.yaml
+---------------------------
+---
+- name:  This install and starts Apache Webserver
+  hosts: webservers
+  
+  tasks:
+  -name:  install Apache Webserver
+   yum:   name=httpd    state=latest
+  
+  -name:  check httpd status
+   service:   name=httpd    state=started
+   ------------------------EOF
+   
