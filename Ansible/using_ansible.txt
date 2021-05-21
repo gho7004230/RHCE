@@ -1,0 +1,60 @@
+Core Components of Ansible:
+-Free & Opensource automation framework by Red Hat
+-Enables to manage & control hosts from a central control node
+-Perfrom repeatable tasks on multiple machines
+-Eliminates need to log into each host individually
+-Consistent application deployment & reduced human error
+-Alternatives to Chef, Puppet & Saltstack
+-Easier to use & learn than the ones above
+-Uses YAML config files to automate jobs
+-Uses SSH protocol
+-Agentless
+
+Ansible is used for:
+-Config Management
+-Orchestration
+-App Deployment
+-Provisioning
+-Security & Compliance
+
+Architecture:
+-Inventories
+-APIs
+-Modules
+-Plugins
+-Networking
+-Hosts
+-Playbooks
+-CMDB
+-Cloud
+------------------------------------------------------------------
+Install on Any Distro or Linux but Optimized for RHEL/CentOS
+
+Control Node:
+# Install Ansible:
+yum -y install ansible
+# Verify:
+ansible --version
+# Verify Python
+python -V (Ensure python3 is installed)
+# If multiple versions of python installed, set python3 as default:
+alternatives --set python /usr/bin/python3
+------------------------------------------------------------------
+Create Inventory File:
+
+cd ~
+vi inventory
+--------------------------
+[webservers]
+192.168.0.112
+192.168.0.113
+
+[db servers]
+192.168.0.114
+192.168.0.115
+-----------------------EOF
+
+# Verify inventory file
+ansible all -i inventory --list-hosts
+
+
