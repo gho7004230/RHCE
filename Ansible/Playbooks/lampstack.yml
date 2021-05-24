@@ -1,0 +1,60 @@
+# This will deploy a lamp stack (Linux Apache, MariaDB, PHP Server)
+---
+- name: Deploy LAMP Server to Managed Node
+    hosts: webservers
+    remote_user: ansible
+    become: yes
+    
+    tasks:
+    - name: Install Apache Server
+        yum: name=https
+             state=latest
+             
+    - name: Start Apache Server
+        service: 
+            name=https
+            state=started 
+             
+    - name: Install MariaDB Server
+        yum: name=[mariadb-server, mariadb-devel, mariadb-connector-odbc, mariadb-server-utils, python3-pymysql, php]
+             state=latest
+             
+    - name: Start MariaDB Service
+        service: 
+            name=mariadb
+            state=started
+        
+    - name: Update MariaDB Root Password
+        mysql_user: 
+            name: root
+            host: localhost
+            password: mysql
+            login_user: root
+            check_implicit_admin: yes
+            priv: "*.*:ALL,GRANT"
+               
+    - name: Create a new Database called Inventory
+        mysql_db: 
+            name=inventory
+            state=present
+            login_user=root
+            login_password=mysql
+               
+    - name: Copy SQL File
+        copy: 
+            src=/source/servers.sql
+            dest=/tmp/servers.sql
+               
+    - name: Create Table with Data
+        shell: mysql -u root -p mysql < /tmp/servers.sql
+
+    - name: Copy PHP File
+        copy: src=/source/connection.php dest=/var/www/html/
+
+    - name: Copy Index PHP File
+        copy: src=/source/index.php dest=/var/www/html/
+            
+    - name: Restart httpd service
+        service: 
+            name=httpd
+            state=restarted
