@@ -1,4 +1,4 @@
-# This will deploy a lamp stack (Linux Apache, MariaDB, PHP Server)
+# This will deploy a lamp stack (Linux Apache, MariaDB, PHP Server) "Note: must have firewalld disabled for this exercise"
 ---
 - name: Deploy LAMP Server to Managed Node
     hosts: webservers
