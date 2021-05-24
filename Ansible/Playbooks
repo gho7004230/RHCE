@@ -44,3 +44,22 @@ touch http.yaml
 # ansible-playbook --ask-become-pass -K sudo up to root w/out using a password
 # ansible-playbook --become -b  run as root w/out a password
 # ansible-playbook --become_user=ansible run as another user
+
+-------------------------------------------------------------------------------------
+
+# Ad-Hoc Commands:
+
+# Ping all hosts in inventory file
+ansible -m ping all
+
+# Ping all hosts in the webservers group in inventory file
+ansible -m ping webservers
+
+# Check uptime of all webervers
+ansible -a "uptime" webservers
+
+ansible -a "{command}" (runs any linux command)
+
+ansible-doc -l (lists ansible modules)
+
+ansible-doc {module-name} (provides info about the module)
