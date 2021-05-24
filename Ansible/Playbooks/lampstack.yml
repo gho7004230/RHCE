@@ -9,20 +9,28 @@
     - name: Install Apache Server
         yum: name=https
              state=latest
-             
+        tags:
+        - installapache
+        
     - name: Start Apache Server
         service: 
             name=https
             state=started 
-             
+        tags:
+        - startapache
+        
     - name: Install MariaDB Server
         yum: name=[mariadb-server, mariadb-devel, mariadb-connector-odbc, mariadb-server-utils, python3-pymysql, php]
              state=latest
-             
+        tags:
+        - installmariadb
+        
     - name: Start MariaDB Service
         service: 
             name=mariadb
             state=started
+        tags:
+        - startmariadb
         
     - name: Update MariaDB Root Password
         mysql_user: 
@@ -32,6 +40,8 @@
             login_user: root
             check_implicit_admin: yes
             priv: "*.*:ALL,GRANT"
+        tags:
+        - configdb          
                
     - name: Create a new Database called Inventory
         mysql_db: 
@@ -39,6 +49,9 @@
             state=present
             login_user=root
             login_password=mysql
+            
+        tags:
+        - createdb        
                
     - name: Copy SQL File
         copy: 
@@ -58,3 +71,4 @@
         service: 
             name=httpd
             state=restarted
+...
