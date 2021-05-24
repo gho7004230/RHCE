@@ -12,10 +12,14 @@ touch http.yaml
   
   tasks:
   -name:  install Apache Webserver
-   yum:   name=httpd    state=latest
+   yum:   
+       name=httpd    
+       state=latest
   
   -name:  check httpd status
-   service:   name=httpd    state=started
+   service:   
+       name=httpd    
+       state=started
 ------------------------EOF
 
 -------------------------------------------------------------------------------------
@@ -35,7 +39,9 @@ touch http.yaml
    become_user: ansible
    
   -name:  check httpd status
-   service:   name=httpd    state=started
+   service:   
+       name=httpd    
+       state=started
 ------------------------EOF
 
 # Also, there is become_method and become_flags
