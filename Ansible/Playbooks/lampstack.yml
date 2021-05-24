@@ -5,6 +5,7 @@
     remote_user: ansible
     become: yes
     
+# Apache Install
     tasks:
     - name: Install Apache Server
         yum: name=https
@@ -19,6 +20,7 @@
         tags:
         - startapache
         
+ # MariaDB Install       
     - name: Install MariaDB Server
         yum: name=[mariadb-server, mariadb-devel, mariadb-connector-odbc, mariadb-server-utils, python3-pymysql, php]
              state=latest
@@ -32,6 +34,7 @@
         tags:
         - startmariadb
         
+ # MariaDB Configure      
     - name: Update MariaDB Root Password
         mysql_user: 
             name: root
@@ -71,7 +74,8 @@
         copy: src=/source/index.php dest=/var/www/html/
         tags:
         - copyfiles
-            
+        
+# Apache Restart           
     - name: Restart httpd service
         service: 
             name=httpd
