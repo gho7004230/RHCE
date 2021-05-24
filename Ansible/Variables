@@ -1,0 +1,11 @@
+# A Variable represents a value
+# 3 types:
+1: Playbook Variables
+2: Inventory Variables
+3: Special Variables
+
+#Example:
+---------------------------------
+- hosts: webservers
+- Vars:
+  -  web_dir:/var/www/html/
