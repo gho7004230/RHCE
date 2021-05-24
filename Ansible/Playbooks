@@ -7,7 +7,7 @@ touch {playbook_name}.yaml
 touch http.yaml
 ---------------------------
 ---
-- name:  This install and starts Apache Webserver
+- name:  This install and starts Apache Webserver on Managed Nodes
   hosts: webservers
   
   tasks:
