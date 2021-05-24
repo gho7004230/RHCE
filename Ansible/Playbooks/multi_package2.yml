@@ -1,0 +1,6 @@
+# This playbook will install multiple yum packages in a loop
+---
+- name: Install multiple yum packages
+    yum: name=[wget, epel-release, docker.io, docker-compose, gcc, cifs-utils]
+    state: latest
+...
