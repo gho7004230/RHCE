@@ -17,4 +17,30 @@ touch http.yaml
   -name:  check httpd status
    service:   name=httpd    state=started
 ------------------------EOF
+
+-------------------------------------------------------------------------------------
+
+# Escalate Privs using become
+
+touch http.yaml
+---------------------------
+---
+- name:  This install and starts Apache Webserver on Managed Nodes
+  hosts: webservers
+  
+  tasks:
+  -name:  install Apache Webserver
+   yum:   name=httpd    state=latest
+   become: yes
+   become_user: ansible
    
+  -name:  check httpd status
+   service:   name=httpd    state=started
+------------------------EOF
+
+# Also, there is become_method and become_flags
+
+# ansible-playbook --ask-become-pass  promts for a password
+# ansible-playbook --ask-become-pass -K sudo up to root w/out using a password
+# ansible-playbook --become -b  run as root w/out a password
+# ansible-playbook --become_user=ansible run as another user
