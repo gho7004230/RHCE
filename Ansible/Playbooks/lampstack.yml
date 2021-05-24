@@ -49,7 +49,6 @@
             state=present
             login_user=root
             login_password=mysql
-            
         tags:
         - createdb        
                
@@ -57,18 +56,26 @@
         copy: 
             src=/source/servers.sql
             dest=/tmp/servers.sql
+        tags:
+        - copysql 
                
     - name: Create Table with Data
         shell: mysql -u root -p mysql < /tmp/servers.sql
+        tags:
+        - createtable
 
     - name: Copy PHP File
         copy: src=/source/connection.php dest=/var/www/html/
 
     - name: Copy Index PHP File
         copy: src=/source/index.php dest=/var/www/html/
+        tags:
+        - copyfiles
             
     - name: Restart httpd service
         service: 
             name=httpd
             state=restarted
+        tags:
+        - restartapache             
 ...
