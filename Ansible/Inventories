@@ -1,1 +1,4 @@
 Can be grouped as servers and IPs
+
+# Check Inventory File:
+ansible-inventory -i ansible/inventory --list
