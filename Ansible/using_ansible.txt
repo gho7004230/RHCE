@@ -43,7 +43,8 @@ alternatives --set python /usr/bin/python3
 Create Inventory File:
 
 cd ~
-vi inventory
+mkdir ansible
+vi ansible/inventory
 --------------------------
 [webservers]
 192.168.0.112
@@ -55,6 +56,6 @@ vi inventory
 -----------------------EOF
 
 # Verify inventory file
-ansible all -i inventory --list-hosts
+ansible all -i ansible/inventory --list-hosts
 
 
