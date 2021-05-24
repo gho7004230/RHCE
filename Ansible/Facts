@@ -1,0 +1,4 @@
+# Control Node Fact List
+ansible localhost -m setup
+
+ansible localhost -m setup -a "filter=*ipv4"
