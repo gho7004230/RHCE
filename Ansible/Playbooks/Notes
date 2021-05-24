@@ -1,0 +1,112 @@
+-Set of config management scripts
+-Instructions are written in YAML
+
+command:
+touch {playbook_name}.yaml
+
+touch http.yaml
+---------------------------
+---
+- name:  This install and starts Apache Webserver on Managed Nodes
+  hosts: webservers
+  
+  tasks:
+  -name:  install Apache Webserver
+   yum:   
+       name=httpd    
+       state=latest
+  
+  -name:  check httpd status
+   service:   
+       name=httpd    
+       state=started
+------------------------EOF
+
+-------------------------------------------------------------------------------------
+
+# Escalate Privs using become
+
+touch http.yaml
+---------------------------
+---
+- name:  This install and starts Apache Webserver on Managed Nodes
+  hosts: webservers
+  
+  tasks:
+  -name:  install Apache Webserver
+   yum:   name=httpd    state=latest
+   become: yes
+   become_user: ansible
+   
+  -name:  check httpd status
+   service:   
+       name=httpd    
+       state=started
+------------------------EOF
+
+# Also, there is become_method and become_flags
+
+# ansible-playbook --ask-become-pass  promts for a password
+# ansible-playbook --ask-become-pass -K sudo up to root w/out using a password
+# ansible-playbook --become -b  run as root w/out a password
+# ansible-playbook --become_user=ansible run as another user
+
+-------------------------------------------------------------------------------------
+
+# Ad-Hoc Commands:
+
+# Ping all hosts in inventory file
+ansible -m ping all
+
+# Ping all hosts in the webservers group in inventory file
+ansible -m ping webservers
+
+# Check uptime of all webervers
+ansible -a "uptime" webservers
+
+ansible -a "{command}" (runs any linux command)
+
+ansible-doc -l (lists ansible modules)
+
+ansible-doc {module-name} (provides info about the module)
+
+-------------------------------------------------------------------------------------
+
+# Copy files from Control Node to Managed Nodes:
+ansible all -m copy -a "src=/root/Documents/testfile.txt dest=/home/ansible/Documents/testfile.txt" 
+
+# Install packages on Managed Nodes:
+ansible all -m yum -a "name=httpd state=present"
+
+# Remove packages on Managed Nodes:
+ansible all -m yum -a "name=httpd state=absent"
+
+# Create a user on Managed Nodes:
+ansible all -m user -a "name=glenn password={password}"
+
+# Check status of a service Managed Nodes:
+ansible all -m service -a "name=httpd state=started"
+
+-------------------------------------------------------------------------------------
+Create a Playbook:
+
+New Example
+
+touch new_playbook.yaml
+--------------------------------------------
+# New Playbook Example ("note: all playbooks always start with the 3 dashes")
+---
+- name: Copy file to all nodes
+  hosts: all
+  tasks:
+    - name: Copy a file to all managed hosts
+    - copy:
+        src: /home/ansible/Documents/testfile.txt
+        dest: /home/ansible/Documents/hello_world.txt
+        owner: ansible
+...
+-----------------------------------------EOF
+
+# Execute a playbook:
+ansible-playbook new_playbook.yaml
+        
