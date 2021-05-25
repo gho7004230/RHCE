@@ -1,0 +1,9 @@
+# Deploy a new admin group using the same variable from the playbook, but overriding the defined rhel_nodes:vars in the inventory file
+ansible-playbook deploy_users.yml -e "admin_group=root"
+
+# Add a new user
+ansible rhel_nodes -b -m user -a "user=bob"
+
+# Remove a user
+ansible rhel_nodes -b -m user -a "user=bob state=absent remove=true"
+
