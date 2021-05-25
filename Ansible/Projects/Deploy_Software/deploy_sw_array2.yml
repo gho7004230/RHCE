@@ -1,0 +1,17 @@
+# Deploy software using a list.  THis is t he current method
+---
+- name: Deploy array of software
+  hosts: rhel_nodes
+  tasks:
+  
+    - name: ping nodes
+      ping:
+    
+    - name: Install multiple software packages
+      yum:
+        name:
+          - mlocate
+          - cifs-utils
+          - python3
+        state: latest
+...
