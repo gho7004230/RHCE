@@ -17,3 +17,12 @@ yum -y install epel-release
 yum makecache
 yum install -y ansible
 ansible --version
+
+# On Managed Nodes (RHEL or CentOS), change the /etc/sudoers file to look as such:
+#%wheel       ALL=(ALL)       ALL
+%wheel        ALL=(ALL)       NOPASSWD: ALL
+
+
+# On Managed Nodes (Ubuntu or Debian), change the /etc/sudoers file to look as such:
+#root        ALL=(ALL:ALL)       ALL
+root         ALL=(ALL:ALL)       NOPASSWD: ALL
