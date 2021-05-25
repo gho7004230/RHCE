@@ -1,0 +1,12 @@
+# For RHEL 8
+subscription-manager repos
+subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+yum install ansible
+ansible --version
+
+
+# For CentOS 7
+yum -y install epel-release
+yum makecache
+yum install -y ansible
+ansible --version
