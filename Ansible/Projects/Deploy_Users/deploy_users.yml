@@ -1,0 +1,16 @@
+# Playbook to deploy privileged user account(s) to managed nodes
+---
+- name: Deploy User Account
+  hosts: rhel_nodes
+  become: true
+  tasks:
+  
+    - name: Provision User Account
+      user:
+        name: devops1
+        groups "{{ admin_group }}"
+        append: true
+        create_home: true
+        comment: "Ansible Management Account"
+        expires: -1
+ ...
