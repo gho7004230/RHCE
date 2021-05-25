@@ -1,7 +1,7 @@
 Installing Ansible:
 
-Ansible needs to be installed on your Control Node. On Red Hat Enterprise Linux 8 we need to enable to repository and then install Ansible. 
-We can use the command *# subscription-manager repos* to list the repository names so we do not need to remember the exact name of the repository that we need to enable. 
+Ansible needs to be installed on your Control Node. On Red Hat Enterprise Linux 8, you need to enable to repository and then install Ansible. 
+You can use the command *# subscription-manager repos* to list the repository names so you do not need to remember the exact name of the repository that we need to enable. 
 On CentOS, ansible is in the default repositories but add the *epel* repository to get a much later version of Ansible. 
 Ansible can also be installed on other Linux distributions, there is no requirement to have it installed on RHEL 8, or in fact, Enterprise Linux at all.
 
