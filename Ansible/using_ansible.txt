@@ -58,4 +58,9 @@ vi ansible/inventory
 # Verify inventory file
 ansible all -i ansible/inventory --list-hosts
 
+# Logging
+touch /var/log/ansible.log
+chmod 666 ansible.log
+#  Uncomment logging in /etc/ansible/ansible.cfg
+
 
