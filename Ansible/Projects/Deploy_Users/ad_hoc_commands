@@ -1,3 +1,10 @@
+# Create SSH Keys (Key will be available in /home/{user}/.ssh/id_rsa.pub
+ssh-keygen -t rsa
+
+# Send Pub key to nodes
+ssh-copy-id {user}@192.168.222.14{x}
+# complete authentication process...
+
 # Deploy a new admin group using the same variable from the playbook, but overriding the defined rhel_nodes:vars in the inventory file
 ansible-playbook deploy_users.yml -e "admin_group=root"
 
