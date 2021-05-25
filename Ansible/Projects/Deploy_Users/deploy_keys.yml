@@ -1,0 +1,11 @@
+# Playbook to deploy SSH keys based on devops1 user deployment playbook
+---
+- name: Deploy Users SSH Keys
+  authorized_key:
+    user: devops1
+    state: present
+    manage_dir: true
+# Variable to lookup a specific file on the manager node system and copy the public key to the client nodes.  So in oder for this to work, you need to ensure
+# that you create a devops1 account on the manager node and a public key using the ssh-keygen command.
+    key: "{{ lookup('file', '/home/devops1/.ssh/id_rsa.pub') }}"
+...
