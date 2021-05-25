@@ -1,16 +1,21 @@
 # Playbook to deploy privileged user account(s) to managed nodes
+# 3 dashes to start
 ---
 - name: Deploy User Account
   hosts: rhel_nodes
+# become root is identified in the ansible.cfg file
   become: true
   tasks:
-  
+# next dash is 2 spaces from beginning to start next indention
     - name: Provision User Account
       user:
+# 2 space indention as everything below is subordinate to the user module
         name: devops1
-        groups "{{ admin_group }}"
+        groups: "{{ admin_group }}"
         append: true
         create_home: true
         comment: "Ansible Management Account"
         expires: -1
+        password: "{{ 'P@ssw0rd1234' | password_hash('sha512','A512') }}"
+ # 3 dashes to end
  ...
