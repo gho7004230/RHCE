@@ -1,0 +1,16 @@
+# Deploy software using an array.  This is depricated but still functional in Ansible
+---
+- name: Deploy array of software
+  hosts: rhel_nodes
+  tasks:
+  
+    - name: ping nodes
+      ping:
+    
+    - name: Install software
+      yum: name={{ item }} state=latest
+      with_items:
+        - mlocate
+        - cifs-utils
+        - python3
+...
