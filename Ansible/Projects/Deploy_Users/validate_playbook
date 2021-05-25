@@ -1,0 +1,2 @@
+ansible-playbook deploy_users.yml --syntax-check
+ansible-playbook deploy_keys.yml --syntax-check
