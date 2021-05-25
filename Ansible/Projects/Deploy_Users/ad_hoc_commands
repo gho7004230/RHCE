@@ -14,3 +14,32 @@ ansible rhel_nodes -b -m user -a "user=bob"
 # Remove a user
 ansible rhel_nodes -b -m user -a "user=bob state=absent remove=true"
 
+
+# Create a vars directory & encrypt the file using ansible vault
+mkdir /home/ansible/Ansible/group_vars
+vi /home/ansible/Ansible/group_vars/rhel_nodes
+----------------------------------------------
+admin_group: wheel
+default_user_password: P@ssw0rd1234
+-------------------------------------------EOF
+ansible-vault encrypt /home/ansible/Ansible/group_vars/rhel_nodes
+New Vault password:
+Confirm New Vault password:
+Encryption successful
+
+# view encrypted vault file
+cat /home/ansible/Ansible/group_vars/rhel_nodes
+ANSIBLE_VAULT;1.1;AES256
+63316339663366333563633936333934313361336465656430386135613664643735643564613936
+6233626130346233663938646130623366303165653735360a616261353430653339346438646430
+37343030666337363162626630626439373936616533356334323031306630373164326264333337
+3432616462313862610a323734343466303831383137343238313132623730633661633162386662
+38616136326139313461343231376461633139663534343161396561636161396132336139656636
+62393464396330303338383836313230643363393937363566343939663164306137363563363935
+626563326335363465656538663434343765
+
+# view unencrypted vault file
+ansible-vault view /home/ansible/Ansible/group_vars/rhel_nodes
+Vault password
+admin_group: wheel
+default_user_password: P@ssw0rd1234
