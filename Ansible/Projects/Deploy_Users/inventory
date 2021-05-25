@@ -1,0 +1,5 @@
+[rhel_nodes]
+192.168.222.[141:143]
+
+[rhel_nodes:vars]
+admin_group=wheel
