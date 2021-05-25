@@ -1,0 +1,21 @@
+# On managed nodes, edit /etc/ssh/sshd_config, uncomment port 22 and change to whatever port you with (not a reserved port 0-1024)
+
+# Add exception to selinux on managed nodes
+sudo semanage port -a -t ssh_port_t -p tcp 65534
+
+# Add firewall exception to managed nodes
+firewall-cmd --zone=public --add-port=65534/tcp --permanent
+firewall-cmd --reload
+
+# Add SSH port to Manager Inventory file
+vi inventory
+---------------------------------
+[rhel_nodes]
+192.168.222.[141:143] ansible_port=65534
+------------------------------EOF
+
+# Restart SSH on managed nodes
+systemctl restart sshd
+
+# Run Playbook or ad-hoc command to verify connectivity
+ansible all -m ping -i /home/ansible/Ansible/inventory
