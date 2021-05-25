@@ -1,0 +1,18 @@
+# Playbook to remove ansible users from managed nodes
+---
+- name: Remove Ansible User
+  hosts: rhel_nodes
+  become: true
+  tasks:
+  
+  - name: Remove User Account
+      user:
+        name: devops1
+        state: absent
+        remove: true
+        
+  - name: Remove Sudo Entry
+      file:
+        path: /etc/sudoers.d/devops1
+        state: absent
+...
