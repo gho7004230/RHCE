@@ -1,5 +1,10 @@
 [rhel_nodes]
 192.168.222.[141:143]
 
+#add variables for priv escalation
 [rhel_nodes:vars]
 admin_group=wheel
+ansible_port=65534
+ansible_user=ansible
+ansible_become_method=sudo
+ansible_become_user=root
