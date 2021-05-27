@@ -1,0 +1,7 @@
+[rhel_nodes]
+ansible1.example.com
+ansible2.example.com
+
+# Special Interpreter for RHEL 8 nodes; /usr/bin/python is depricated in newest ver on ansible
+[rhel_nodes:vars]
+ansible_python_interpreter=/usr/libexec/platform-python
