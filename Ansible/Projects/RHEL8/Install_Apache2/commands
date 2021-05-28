@@ -1,0 +1,23 @@
+ansible-playbook install_apache2.yml --syntax-check
+# expected output:
+playbook: install_apache2.yml
+
+ansible-playbook install_apache2.yml
+
+# expected output:
+PLAY [Install and Start Apache2 Service to RHEL Servers] **************************************************
+
+TASK [Gathering Facts] ************************************************************************************
+ok: [ansible1.example.com]
+
+TASK [Install Apache2] ************************************************************************************
+ok: [ansible1.example.com]
+
+TASK [Start httpd Service] ********************************************************************************
+ok: [ansible1.example.com]
+
+TASK [Verify service is running] **************************************************************************
+changed: [ansible1.example.com]
+
+PLAY RECAP ************************************************************************************************
+ansible1.example.com       : ok=4    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
