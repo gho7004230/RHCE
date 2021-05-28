@@ -1,5 +1,6 @@
+# Check Playbook for Syntax Errors:
 ansible-playbook install_apache2.yml --syntax-check
-# expected output:
+# Expected output:
 playbook: install_apache2.yml
 
 # Perform a dry run using the -C argument:
@@ -8,7 +9,7 @@ ansible-playbook -C install_apache2.yml
 # Run the Play for real:
 ansible-playbook install_apache2.yml
 
-# expected output:
+# Expected output:
 PLAY [Install and Start Apache2 Service to RHEL Servers] **********************************************************************************************
 
 TASK [Gathering Facts] ********************************************************************************************************************************
