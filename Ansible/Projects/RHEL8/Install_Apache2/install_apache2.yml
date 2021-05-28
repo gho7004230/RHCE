@@ -16,4 +16,29 @@
 
   - name: Verify service is running
     command: systemctl status httpd
+
+# Setup Firewall Service
+  - name: Start Firewalld Service
+    service:
+      name: firewalld
+      state: started
+      enabled: yes
+
+  - name: Configure Firewalld Service
+    firewalld:
+      zone: public
+      service: http
+      state: enabled
+      permanent: yes
+
+  - name: Reload Firewalld Service
+    command: firewall-cmd --reload
+
+# Verify web service by trying to access website from the Control Node
+- name: Verify http public access
+  hosts: localhost
+  become_user: ansible
+  tasks:
+  - name: Verify Site
+    command: curl -v http://ansible1.example.com warn=False
 ...
