@@ -40,5 +40,6 @@
   become_user: ansible
   tasks:
   - name: Verify Site
-    command: curl -v http://ansible1.example.com warn=False
+    uri:
+      url: http://ansible1.example.com
 ...
