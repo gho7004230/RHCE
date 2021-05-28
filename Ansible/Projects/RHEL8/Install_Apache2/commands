@@ -1,5 +1,6 @@
 # Check Playbook for Syntax Errors:
 ansible-playbook install_apache2.yml --syntax-check
+
 # Expected output:
 playbook: install_apache2.yml
 
