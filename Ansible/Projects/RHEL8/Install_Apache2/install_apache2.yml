@@ -1,0 +1,19 @@
+# Playbook to install Apache2 to the webserver inventory list
+---
+- name: Install and Start Apache2 Service to RHEL Servers
+  hosts: webservers
+  tasks:
+  - name: Install Apache2
+    yum:
+      name: httpd
+      state: installed
+
+  - name: Start httpd Service
+    service:
+      name: httpd
+      state: started
+      enabled: yes
+
+  - name: Verify service is running
+    command: systemctl status httpd
+...
