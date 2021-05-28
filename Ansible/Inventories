@@ -1,4 +1,22 @@
-Can be grouped as servers and IPs
+# Can be grouped as servers and IPs
+# Example Inventory File:
+---------------------------------------------
+[rhel_nodes]
+ansible1.example.com
+ansible2.example.com
+[rhel_nodes:vars]
+ansible_python_interpreter=/usr/libexec/platform-python
+
+[webservers]
+ansible1.example.com
+
+[db_servers]
+ansible2.example.com
+
+[servers:children]
+webservers
+db_servers
+------------------------------------------EOF
 
 # Check Inventory File:
 ansible-inventory -i ansible/inventory --list
