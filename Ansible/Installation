@@ -6,11 +6,20 @@ On CentOS, ansible is in the default repositories but add the *epel* repository 
 Ansible can also be installed on other Linux distributions, there is no requirement to have it installed on RHEL 8, or in fact, Enterprise Linux at all.
 
 # For RHEL 8
+# For new RHEL installations
+subscription-manager register  
+# use Red Hat Developer login.  Sign up for a free subscription if you do not have one.
+subscription-manager attach
 subscription-manager repos
 subscription-manager repos --enable ansible-2-for-rhel-8-x86_64-rpms
+subscription-manager repos --enable ansible-2.9-for-rhel-8-x86_64-rpms
 yum install ansible
 ansible --version
 
+# Set Python3 as default
+alternatives --set python /usr/bin/python3
+# For newer versions of ansible, you will need to set the host vars to:
+ansible_python_interpreter=/usr/libexec/platform-python
 
 # For CentOS 7
 yum -y install epel-release
