@@ -2,6 +2,10 @@ ansible-playbook install_apache2.yml --syntax-check
 # expected output:
 playbook: install_apache2.yml
 
+# Perform a dry run using the -C argument:
+ansible-playbook -C install_apache2.yml
+
+# Run the Play for real:
 ansible-playbook install_apache2.yml
 
 # expected output:
