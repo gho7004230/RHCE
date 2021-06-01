@@ -16,9 +16,17 @@ ansible webservers -m user -a "name=lisa state=absent force=true"
 # copy file from controller to managed nodes:
 ansible webservers -m copy -a "src=testfile.txt dest=/tmp/testme.txt"
 
-# install package on machine
+# install package on machine:
 ansible all -m yum -a "name=mlocate state=latest"
 
-# restart & enable a service
+# restart & enable a service:
 ansible all -m service -a "name=crond state=restarted enabled=yes"
 
+# list all ansible modules:
+ansible-doc -l
+
+# list all information about a specific ansible module:
+ansible-doc ping
+
+# list options about a specific ansible module:
+ansible-doc -s ping
