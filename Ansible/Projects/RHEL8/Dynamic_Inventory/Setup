@@ -1,7 +1,0 @@
-alternatives --set python /usr/bin/python3
-yum -y install perl-JSON-PP
-chmod +x listing33.py
-# Test command raw output
-./listing33.py --list
-# Run command in ansible
-ansible -i listing33.py all --list-hosts
