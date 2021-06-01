@@ -1,0 +1,11 @@
+# Playbook to setup web server with custom facts
+---
+- name: Install & start httpd with facts
+  hosts: webservers
+  tasks:
+
+  - name: Install httpd
+    yum:
+      name: "{{ ansible_facts['ansible_local']['custom']['software']['package'] }}"
+      state: latest
+...
