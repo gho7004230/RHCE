@@ -1,0 +1,17 @@
+# Playbook to copy custom facts & vars to managed nodes
+---
+- name: Copy Facts
+  hosts: rhel_nodes
+  tasks:
+
+  - name: Create facts directory
+    file: 
+      state: directory
+      recurse: yes
+      path: /etc/ansible/facts.d
+
+  - name: Copy custom facts to new directory
+    copy:
+      src: custom.fact
+      dest: /etc/ansible/facts.d
+...
