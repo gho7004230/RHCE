@@ -1,0 +1,20 @@
+# Playbook to use variables
+---
+- name: Use Variables in plays
+  hosts: all
+  vars: 
+    ansible_python_interpreter: /usr/libexec/platform-python
+    netstat_package: net-tools
+    cifs_package: cifs-utils
+    locate_package: mlocate
+    
+  tasks:
+
+  - name: install packages    
+    yum:
+      name: 
+        - "{{ netstat_package }}"
+        -  "{{ cifs_package }}"
+        -  "{{ locate_package }}"
+      state: latest
+...
