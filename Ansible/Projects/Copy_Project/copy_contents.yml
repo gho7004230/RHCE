@@ -1,0 +1,23 @@
+# Playbook to copy content to managed nodes while using ansible_facts as variables
+---
+- name: Copy contents to servers
+  hosts: all
+  tasks:
+  
+  - name: Identify Server IP addresses
+    debug:
+      msg: > 
+        {{ ansible_facts.hostname }} is using the following IP address: {{ ansible_facts.all_ipv4_addresses }}
+
+
+  - name: Copy contents to webservers
+    copy:
+      content: |
+        Hello {{ ansible_facts.hostname }}
+        Good to see you!
+      dest: 
+        /tmp/hello.txt
+
+  - name: Verify file delivery
+    shell: ls /tmp | grep hello
+...
