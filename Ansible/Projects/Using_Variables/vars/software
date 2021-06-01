@@ -1,0 +1,3 @@
+netstat_package: net-tools
+cifs_package: cifs-utils
+locate_package: mlocate
