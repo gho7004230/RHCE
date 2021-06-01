@@ -1,0 +1,18 @@
+# Playbook to use variables located in the ./vars directory
+---
+- name: Use Variables in plays
+  hosts: all
+  vars_files:
+    - vars/common
+    - vars/software
+    
+  tasks:
+
+  - name: install packages    
+    yum:
+      name: 
+        - "{{ netstat_package }}"
+        -  "{{ cifs_package }}"
+        -  "{{ locate_package }}"
+      state: latest
+...
