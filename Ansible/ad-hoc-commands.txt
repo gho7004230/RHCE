@@ -1,0 +1,24 @@
+# using the command module:
+ansible webservers -m command -a "ip address"
+
+# using the shell module:
+ansible webservers -m shell -a "ip address | grep lo"
+
+# using the raw module:
+ansible  -u root -i inventory webservers --ask-pass -m raw -a "ip address | grep lo" (enter ssh password to complete command)
+
+# add an ansible control user:
+ansible webservers -m user -a "name=lisa group=wheel"
+
+# remove users:
+ansible webservers -m user -a "name=lisa state=absent force=true"
+
+# copy file from controller to managed nodes:
+ansible webservers -m copy -a "src=testfile.txt dest=/tmp/testme.txt"
+
+# install package on machine
+ansible all -m yum -a "name=mlocate state=latest"
+
+# restart & enable a service
+ansible all -m service -a "name=crond state=restarted enabled=yes"
+
