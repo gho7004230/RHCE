@@ -1,0 +1,2 @@
+ansible webservers -m copy -a "src=testfile.txt dest=/tmp/testme.txt"
+ansible webservers -m shell -a "ls /tmp | grep testme
