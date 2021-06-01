@@ -1,0 +1,57 @@
+# Multi-Play playbook to install Apache2 to the webserver inventory list
+---
+- name: First Play - Install and Start Apache2 Service to RHEL Servers
+  hosts: webservers
+  tasks:
+  - name: Install Apache2
+    yum:
+      name: httpd
+      state: installed
+
+# Add multi-line content using a pipe to an index html page and copy over to the web server
+
+  - name: Create an Index Page
+    copy:
+      content: |
+        Welcome to Ansible1!
+        This is a fun place to be...
+      dest: /var/www/html/index.html
+
+  - name: Start httpd Service
+    service: 
+      name: httpd
+      state: started
+      enabled: yes
+
+  - name: Verify service is running
+    command: systemctl status httpd
+  
+  - name: Start Firewalld Service
+    service:
+      name: firewalld
+      state: started
+      enabled: yes
+
+  - name: Configure Firewalld Service
+    firewalld:
+      zone: public
+      service: http 
+      state: enabled
+      permanent: yes
+
+  - name: Reload Firewalld Service
+    command: firewall-cmd --reload
+
+# New Play to verify web service by trying to access website from the Control Node.  
+# Play disables the sudo so ansible will the the user of this task
+
+- name: Second Play - Verify http public access
+  hosts: localhost
+  become: no
+  tasks:
+  - name: Verify Site
+    uri:
+      url: http://ansible1.example.com
+      return_content: yes
+      status_code: 200
+...
