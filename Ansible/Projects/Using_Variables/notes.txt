@@ -1,0 +1,4 @@
+# By using vars in the playbook, I no longer need to store the variables inside of the Inventory file, which is a depricated practice; from here on out, 
+# until I get to creating a vars directory, I will add a vars header in my yml file , primarilty for:
+
+ansible_python_interpreter: /usr/libexec/platform-python
