@@ -1,0 +1,10 @@
+# Simple playbook to gather facts of mamanged hosts and store them in variable ansible_facts
+---
+- name: Gather facts on managed nodes
+  hosts: all
+  tasks:
+
+  - name: Gather facts
+    debug:
+      var: ansible_facts.hostname
+...
