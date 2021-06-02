@@ -1,0 +1,14 @@
+# Commands to set up Vault:
+# First create vars directory and secrets.yml:
+mkdir vars
+sudo ansible-vault create vars/secrets.yml  (Enter a password)
+chown -r ansible:ansible vars
+
+# Verify that the vault variable works inside of the playbook:
+ansible-playbook --vault-password-file=vault-pass create_user.yml
+
+# Run playbook:
+ansible-playbook --ask-vault-pass create_users.yml  (Enter vault password)
+
+# Change current vault password:
+sudo ansible-vault rekey vars/secrets.yml  (Enter new password)
