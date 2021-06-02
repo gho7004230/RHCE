@@ -1,0 +1,9 @@
+[webservers]
+ansible1.example.com
+
+[db_servers]
+ansible2.example.com
+
+[servers:children]
+webservers
+db_servers
