@@ -1,0 +1,17 @@
+# Playbook to test register output by searching the variables for a particualr string
+---
+- name: find a string in the register
+  hosts: webservers
+  vars_files:
+    - vars/common
+  tasks:
+
+  - name: Use shell to cat /etc/passwd
+    shell: cat /etc/passwd
+    register: passwd_contents
+  
+  - name: Use debug to render output
+    debug:
+      msg: the passwd file contains user ansible
+    when: passwd_contents.stdout.find('ansible') != -1
+...
