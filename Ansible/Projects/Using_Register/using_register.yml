@@ -2,6 +2,7 @@
 ---
 - name: Use Register
   hosts: webservers
+# Uses the vars/common to pull common variables
   vars_files: vars/common
   tasks:
 
@@ -10,5 +11,6 @@
     register: passwd_contents
   - name: Run Debug
     debug:
+# Stores the output of /etc/passwd into a variable called passwd_contents.  debug will render the outputr to the screen fore the admin to view the results
       var: "passwd_contents"
 ...
