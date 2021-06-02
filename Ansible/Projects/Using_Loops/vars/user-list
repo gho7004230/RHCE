@@ -1,0 +1,17 @@
+# Multivalued Variables
+users:
+  - username: linda
+    homedir: /home/linda
+    shell: /bin/bash
+
+  - username: stan
+    homedir: /home/stan
+    shell: /bin/bash
+
+  - username: stacy
+    homedir: /home/stacy 
+    shell: /bin/bash
+
+  - username: anna
+    homedir: /home/anna
+    shell: /bin/bash
