@@ -1,0 +1,20 @@
+# Playbook to use when to check multiple conditionals using when, and, & or statements
+---
+- name: Install Apache2 Server
+  hosts: webservers
+  vars_files:
+    - vars/common
+  tasks:
+
+  - name: Install Apach2 on RHEL or CentOS only and if memory allocation is available
+    yum:
+      name: httpd
+      state: latest
+# Using the > to allow long lines of text to wrap around but still be evaluated as a single statement
+    when: >
+      ( ansible_facts['distribution'] == "RedHat" and
+        ansible_facts['memfree_mb'] < 512 )
+      or
+      ( ansible_facts['distribution'] == "CentOS" and 
+        ansible_facts['memfree_mb'] < 256 )
+...
