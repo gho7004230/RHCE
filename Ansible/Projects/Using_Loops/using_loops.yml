@@ -1,0 +1,30 @@
+# Playbook to use a loop to install services and incorporate the item variable by default
+---
+- name: Install & Start services
+  hosts: webservers
+  vars_files: vars/common
+# Establish addtional variables for services
+  vars:
+    services:
+      - vsftpd
+      - httpd
+      - smb
+  tasks:
+
+  - name: Install packages
+# Install an array of packages
+    yum:
+      name:
+      - vsftpd
+      - httpd
+      - samba
+      state: latest
+
+  - name: Start services
+# Use a loop to start services using item as the variable of services and will loop to iterate through each service startup
+    service:
+      name: "{{ item }}"
+      state: started
+      enabled: yes
+    loop: "{{ services }}"
+...
