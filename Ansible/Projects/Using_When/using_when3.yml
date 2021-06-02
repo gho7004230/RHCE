@@ -1,0 +1,15 @@
+# Playbook to use when and loops to check conditionals prior to installing Apache2
+---
+- name: Install Apache2
+  hosts: webservers
+  vars_files:
+    - vars/common
+  tasks:
+
+  - name: Install Apache2 on RHEL Servers
+    yum:
+      name: httpd
+      state: latest
+    loop: "{{ ansible_facts['mounts'] }}"
+    when: item.device == "/dev/mapper/rhel-root" or item.device == "/dev/sda1"
+...
