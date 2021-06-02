@@ -1,0 +1,14 @@
+# Playbook to use register to output data from a file and use as a variable
+---
+- name: Use Register
+  hosts: webservers
+  vars_files: vars/common
+  tasks:
+
+  - name: Run Shell
+    shell: cat /etc/passwd
+    register: passwd_contents
+  - name: Run Debug
+    debug:
+      var: "passwd_contents"
+...
