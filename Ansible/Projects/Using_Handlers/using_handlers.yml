@@ -1,0 +1,22 @@
+# Playbook to test using hanlders to move through error handling (starting with ignore)
+---
+- name: Restart httpd if it is already running
+  hosts: webservers
+  vars_files:
+    - vars/common
+  tasks:
+
+  - name: Check status of Apache Service
+    command: systemctl is-active httpd
+    ignore_errors: yes
+    register: answer
+
+  - name: Report back answers
+    debug:
+      var: "answer"
+
+  - name: Restart Apache service based on status
+    service:
+      name: httpd
+      state: restarted
+    when: answer.rc == 0
