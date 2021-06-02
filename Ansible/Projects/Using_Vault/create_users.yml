@@ -1,0 +1,14 @@
+# Playbook to create user using ansiuble vault file
+---
+- name: Create user with vault variable file
+  hosts: all
+  become: yes
+  vars_files:
+    - vars/secrets.yml
+  tasks:
+
+  - name: Creating User Account
+    user:
+      name: "{{ username }}"
+      password: "{{ pwhash }}"
+...
