@@ -14,9 +14,9 @@
       msg: printing contents of the registered varible {{ result }}
 
   - name: Restart service
-    service: 
+    service:
       name: httpd
       state: restarted
 # Only restart service is the result variable return code (rc) is zero
-    when: result.rc == 0
+    when: result.rc == 0 and result.stdout == "active"
 ...
