@@ -1,0 +1,22 @@
+# Playbook to verify & restart Apache2 service using register variables and output
+---
+- name: Check Apache2 and restart service if it is running
+  hosts: webservers
+  tasks:
+
+  - name: Check service status
+    command: systemctl is-active httpd
+    ignore_errors: yes
+    register: result
+
+  - name: Show result of register output
+    debug:
+      msg: printing contents of the registered varible {{ result }}
+
+  - name: Restart service
+    service: 
+      name: httpd
+      state: restarted
+# Only restart service is the result variable return code (rc) is zero
+    when: result.rc == 0
+...
