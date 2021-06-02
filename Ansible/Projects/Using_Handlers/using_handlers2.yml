@@ -1,0 +1,26 @@
+# Playbook to test using hanlders to move through error handling (starting with ignore)
+---
+- name: Restart httpd if it is already running
+  hosts: webservers
+  vars_files:
+    - vars/common
+  force_handlers: yes
+  tasks:
+
+  - name: Check status of Apache Service
+    command: systemctl is-active httpd
+    ignore_errors: yes
+    register: answer
+
+  - name: Report back answers
+    debug:
+      var: "answer"
+
+  handlers:
+# Handler will force the restart to execute even though the rc value is 0 and not 1 (proof of concept)
+  - name: Restart Apache service based on status
+    service:
+      name: httpd
+      state: restarted
+    when: answer.rc == 1
+...
