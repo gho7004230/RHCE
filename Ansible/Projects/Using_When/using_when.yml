@@ -1,0 +1,20 @@
+# Playbook to use the when statememnt to test installation against the OS family
+---
+- name: Install Apache2
+  vars_files:
+    - vars/common
+  hosts: webservers
+  tasks:
+
+  - name: Install Apache2 to RHEL Servers only
+    yum:
+      name: httpd
+      state: latest
+    when: ansible_facts['os_family'] == "RedHat"
+
+  - name: Install Apache2 to Debian Servers only
+    apt:
+      name: apache2
+      state: latest
+    when: ansible_facts['os_family'] == "Debian"
+...
