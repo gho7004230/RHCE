@@ -3,15 +3,19 @@ users:
   - username: linda
     homedir: /home/linda
     shell: /bin/bash
+    groups: wheel
 
   - username: stan
     homedir: /home/stan
     shell: /bin/bash
+    groups: users
 
   - username: stacy
     homedir: /home/stacy 
     shell: /bin/bash
+    groups: users
 
   - username: anna
     homedir: /home/anna
     shell: /bin/bash
+    groups: users
