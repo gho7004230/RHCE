@@ -1,0 +1,17 @@
+# Playbook to use mutivalued variables and loops
+---
+- name: Create users from a loop and var file
+  hosts: all
+  vars_files:
+    - vars/common
+    - vars/user-list
+  tasks:
+
+  - name: Create Users
+    user:
+      name: "{{ item.username }}"
+      state: present
+      groups: "{{ item.groups }}"
+      shell: "{{ item.shell }}"
+    loop: "{{ users }}"
+...
