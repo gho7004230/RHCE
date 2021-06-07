@@ -1,0 +1,21 @@
+# Playbook to edit the sshd.cfg file using lineinfile module to disable root logins via ssh
+---
+- name: Reconfigure SSH
+  hosts: servers
+  vars_files: vars/common
+  tasks:
+
+  - name: Disable root login via ssh
+    lineinfile:
+      dest: /etc/ssh/sshd_config
+      regexp: ^PermitRootLogin"
+      line: PermitRootLogin no"
+    notify: restart sshd
+
+# Mind the placement of the handlers module, it can be confusing...
+  handlers:
+# Name and notify (above) have to be the same in order for the handler to work properly...
+  - name: restart sshd
+    service:
+      name: sshd
+      state: restarted
