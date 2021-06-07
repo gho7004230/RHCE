@@ -1,0 +1,17 @@
+# Playbook to check system time on managed nodes
+---
+- name: Check time on Managed Nodes
+  hosts: all
+  vars_files:
+    - vars/common
+  tasks:
+
+  - name: Check time
+    command: date
+    register: answer
+    changed_when: false
+
+  - name: Output time result
+    debug:
+      var: answer.stdout
+...
