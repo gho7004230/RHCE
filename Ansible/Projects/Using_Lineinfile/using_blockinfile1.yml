@@ -1,0 +1,29 @@
+# Playbook to edit the /tmp/hosts file using blockinfile module to add multiple IPs
+---
+- name: Add Blocks of IPs to hosts file
+  hosts: servers
+  vars_files: vars/common
+  tasks:
+
+  - name: Copy /etc/hosts
+    copy:
+      src: /etc/hosts
+      dest: /tmp/hosts
+
+  - name: Add IPs to hosts file
+    blockinfile:
+      path: /tmp/hosts
+      block: |
+        192.168.0.1 host1.example.com
+        192.168.0.2 host2.example.com
+        192.168.0.3 host3.example.com
+      state: present
+
+  - name: Validate result
+    command: cat /tmp/hosts
+    register: answer
+
+  - name: spit out result
+    debug: 
+      var: answer.stdout
+...
