@@ -1,0 +1,24 @@
+# Playbook to use the fetch module to collect files from managed nodes
+---
+- name: Collect files from managed nodes
+  hosts: servers
+  vars_files: vars/common
+  tasks:
+
+  - name: Fetch logs from managed nodes
+    fetch:
+      src: /var/log/messages
+      dest: /tmp/
+
+- name: list /tmp directory
+  hosts: localhost
+  become: no
+  vars_files: vars/common
+  gather_facts: no
+  tasks:
+  - command: ls -la /tmp/
+    register: answer
+
+  - debug: 
+      var: answer.stdout
+...
