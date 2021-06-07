@@ -1,0 +1,16 @@
+# Playbook to use the functionality of the stat module to check file permissions
+---
+- name: Check permissions of /etc/hosts
+  hosts: servers
+  vars_files: vars/common
+  tasks:
+
+  - name: Check Permissions
+    stat:
+      path: /etc/hosts
+    register: stat_result
+
+  - name: Spit out result
+    debug:
+      msg: The value of the /etc/hosts file is {{ stat_result }}
+...
