@@ -1,0 +1,8 @@
+# Playbook using Ansible roles to execute motd playbook
+---
+- name: configure MOTD on managed nodes
+  hosts: servers
+  roles:
+  - role: /Ansible/Projects/roles/motd
+    system_manager: ghoward@example.com
+...
