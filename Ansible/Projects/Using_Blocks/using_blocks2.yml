@@ -1,0 +1,28 @@
+# Playbook to use blocks with a when & rescue statement to trigger a failure on docker and restart httpd
+---
+- name: Restart services on RHEL Servers
+  hosts: webservers
+  vars_files: 
+    - vars/common
+  tasks:
+ 
+  - name: Restart Docker package
+    block:
+    - name: restart docker
+      service:
+        name: docker
+        state: restarted
+
+# When and Block are at the same level, BLock looks at the when statement before executing.
+    when: ansible_distribution == "RedHat"
+
+    rescue:
+    - name: Send Message
+      debug:
+        msg: Docker not installed, restarting Apache2 instead
+
+    - name: restart httpd
+      service:
+        name: httpd
+        state: restarted
+...
