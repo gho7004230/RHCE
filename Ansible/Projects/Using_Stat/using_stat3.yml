@@ -1,0 +1,29 @@
+# Playbook to create a new file, then use the functionality of the stat module to check file permissions
+---
+- name: Create a new file & check permissions
+  hosts: servers
+  vars_files: vars/common
+  tasks:
+
+  - name: Create a new file
+    file:
+      path: /tmp/statfile.txt
+      state: touch
+    
+  - name: Echo message into new file
+    command: echo "Hello World > /tmp/statfile.txt"
+
+  - name: Validate current permissions on file
+    stat:
+      path: /tmp/statfile.txt
+    register: result
+
+  - name: Spit out result
+    debug:
+      msg: The permissions of /tmp/statfile.txt is {{ result.stat.mode }}
+
+  - name: Fail if permssions are not RW,R,NONE(640)
+    fail:
+      msg: "Unexpected file mode, should be set to 0640"
+    when: result.stat.mode != '0640'
+...
