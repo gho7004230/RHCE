@@ -1,0 +1,25 @@
+# Task file to install & configure firewall service
+---
+- name: Install firewall service
+  package:
+    name: "{{ firewall_package }}"
+    state: latest
+
+- name: Enable firewall service
+  service:
+    name: "{{ firewall_service }}"
+    enabled: true
+
+- name: Start firewall service
+  service:
+    name: "{{ firewall_service }}"
+    state: started
+
+- name: Configure firewall service
+  firewalld:
+    service: "{{ item }}"
+    immediate: true
+    permanent: true
+    state: enabled
+  loop: "{{firewall_rules}}"
+...
