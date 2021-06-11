@@ -1,2 +1,4 @@
 # use ansible raw maodule to execute python script to dynamically inventory hosts based on managed node's /etc/hosts file
 ansible -u root -i inventory ansible1.example.com --ask-pass -m raw -a "ip address"
+# Use both static and dynaic inventory files to quesry at once
+ansible-inventory -i inventory -i listing33.py --graph
