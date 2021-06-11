@@ -8,10 +8,12 @@
   tasks:
 
   - name: Include services task file
+  # include processes tasks as play runs dynamically
     include_tasks: tasks/service.yml
     when: ansible_facts['os_family'] == 'RedHat'
 
   - name: Import firewall task file
+  # import pre-processes tasks prior to runnig play so the tasks are static
     import_tasks: tasks/firewall.yml
     vars:
       firewall_rules:
