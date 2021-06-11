@@ -7,9 +7,8 @@
 
   - name: Disable root login via ssh
     lineinfile:
-      dest: /etc/ssh/sshd_config
-      regexp: ^PermitRootLogin"
-      line: PermitRootLogin no"
+      regexp: '^PermitRootLogin'
+      line: PermitRootLogin no
     notify: restart sshd
 
 # Mind the placement of the handlers module, it can be confusing...
