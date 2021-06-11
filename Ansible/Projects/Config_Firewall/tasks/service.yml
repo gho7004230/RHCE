@@ -1,0 +1,17 @@
+# Task file to install Service varible to server variable
+---
+- name: Instal Service
+  yum:
+    name: "{{ apache2_package }}"
+    state: latest
+
+- name: Enable Service
+  service: 
+    name: "{{ apache2_service }}"
+    enabled: true
+
+- name: Start Service
+  service:
+    name: "{{ apache2_service }}"
+    state: started
+...
