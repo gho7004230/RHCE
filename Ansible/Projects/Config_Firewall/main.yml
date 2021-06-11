@@ -1,0 +1,21 @@
+# Playbook to install, start & configure firewall service
+---
+- name: Set up firewall service
+  hosts: webservers
+  vars_files: 
+    - vars/common
+    - vars/services
+  tasks:
+
+  - name: Include services task file
+    include_tasks: tasks/service.yml
+    when: ansible_facts['os_family'] == 'RedHat'
+
+  - name: Import firewall task file
+    import_tasks: tasks/firewall.yml
+    vars:
+      firewall_rules:
+      - http
+      - https
+      - ssh
+...
