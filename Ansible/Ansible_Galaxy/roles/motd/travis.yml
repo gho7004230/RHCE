@@ -1,3 +1,4 @@
+# Travis CI file to trigger on a pull request and perform an automated build in travis-ci.com
 ---
 language: python
 python: "2.7"
@@ -27,3 +28,4 @@ script:
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  ...
