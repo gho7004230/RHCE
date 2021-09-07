@@ -1,0 +1,13 @@
+---
+# default file for esxi-config
+username: '{{ esxi_username }}'
+password: '{{ esxi_password }}'
+
+ntp_state: present
+
+dns_servers: '{{ dns1 }}','{{ dns2 }}'
+
+ntp_servers: '{{ ntp1 }}','{{ ntp2 }}'
+
+change_hostname: false
+...
