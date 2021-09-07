@@ -1,2 +1,22 @@
 #
 ---
+vcenter_hostname: 'vc01.glennsweb.com'
+vcenter_username: '{{ vault_vcenter_username }}'
+vcenter_password: '{{ vault_vcenter_password }}'
+vcenter_datastore: 'vsanDatastore'
+datacenter: 'GLENNSWEB'
+cluster: 'cluster'
+dvs: 'dvSwitch'
+
+esxi_username: '{{ vault_esxi_username }}'
+esxi_password: '{{ vault_esxi_password }}'
+esxi_datastore: 'Datastore1'
+
+domain_name: 'glennsweb.com'
+
+dns_servers:
+  - 10.20.1.10
+  - 10.20.1.11
+ntp_servers:
+  - 10.20.1.10
+  - 10.20.1.11
