@@ -14,9 +14,8 @@ esxi_datastore: 'Datastore1'
 
 domain_name: 'glennsweb.com'
 
-dns_servers:
-  - 10.20.1.10
-  - 10.20.1.11
-ntp_servers:
-  - 10.20.1.10
-  - 10.20.1.11
+dns1: '10.20.1.10'
+dns2: '10.20.1.11'
+
+ntp1: '10.20.1.10'
+ntp2: '10.20.1.11'
