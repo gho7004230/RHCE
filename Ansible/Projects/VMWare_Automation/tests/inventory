@@ -1,0 +1,7 @@
+[esxi_servers]
+esxi-01.glennsweb.com
+esxi-02.glennsweb.com
+esxi-03.glennsweb.com
+
+[vcenter_servers]
+vc01.glennsweb.com
