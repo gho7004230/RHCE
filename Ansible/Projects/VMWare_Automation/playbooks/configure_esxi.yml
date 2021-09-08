@@ -11,7 +11,4 @@
     ntp_state: present
 
   roles:
-    - esxi-host-config
-    - esxi-adv-settings
-    - esxi-services
-    - esxi-vmk-interfaces
+    - config-esxi
